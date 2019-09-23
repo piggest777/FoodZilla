@@ -7,17 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B52F1B962327AAD7001CF1E6 /* Detail VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F1B952327AAD7001CF1E6 /* Detail VC.swift */; };
+		B52F1B9C2327BB25001CF1E6 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F1B9B2327BB25001CF1E6 /* Item.swift */; };
+		B52F1B9E2327BD1A001CF1E6 /* FoodItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F1B9D2327BD1A001CF1E6 /* FoodItems.swift */; };
+		B52F1BA02327C3AB001CF1E6 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52F1B9F2327C3AB001CF1E6 /* ItemCell.swift */; };
+		B550A2322327F96200FE19B1 /* IAPService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550A2312327F96200FE19B1 /* IAPService.swift */; };
+		B550A23423280C2200FE19B1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550A23323280C2200FE19B1 /* Constants.swift */; };
+		B550A237232A4E2C00FE19B1 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550A236232A4E2C00FE19B1 /* Product.swift */; };
+		B550A239232A4E6900FE19B1 /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550A238232A4E6900FE19B1 /* Purchase.swift */; };
 		B5B73E372324445C000CDCB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B73E362324445C000CDCB1 /* AppDelegate.swift */; };
-		B5B73E392324445C000CDCB1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B73E382324445C000CDCB1 /* ViewController.swift */; };
+		B5B73E392324445C000CDCB1 /* StoreFrontVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B73E382324445C000CDCB1 /* StoreFrontVC.swift */; };
 		B5B73E3C2324445C000CDCB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5B73E3A2324445C000CDCB1 /* Main.storyboard */; };
 		B5B73E3E2324445E000CDCB1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5B73E3D2324445E000CDCB1 /* Assets.xcassets */; };
 		B5B73E412324445E000CDCB1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5B73E3F2324445E000CDCB1 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B52F1B952327AAD7001CF1E6 /* Detail VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Detail VC.swift"; sourceTree = "<group>"; };
+		B52F1B9B2327BB25001CF1E6 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		B52F1B9D2327BD1A001CF1E6 /* FoodItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodItems.swift; sourceTree = "<group>"; };
+		B52F1B9F2327C3AB001CF1E6 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		B550A2312327F96200FE19B1 /* IAPService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAPService.swift; sourceTree = "<group>"; };
+		B550A23323280C2200FE19B1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B550A236232A4E2C00FE19B1 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		B550A238232A4E6900FE19B1 /* Purchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purchase.swift; sourceTree = "<group>"; };
 		B5B73E332324445C000CDCB1 /* FoodZilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodZilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B73E362324445C000CDCB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5B73E382324445C000CDCB1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B5B73E382324445C000CDCB1 /* StoreFrontVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreFrontVC.swift; sourceTree = "<group>"; };
 		B5B73E3B2324445C000CDCB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5B73E3D2324445E000CDCB1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5B73E402324445E000CDCB1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -35,6 +51,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B52F1B972327BA95001CF1E6 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B5B73E382324445C000CDCB1 /* StoreFrontVC.swift */,
+				B52F1B952327AAD7001CF1E6 /* Detail VC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		B52F1B982327BAB8001CF1E6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B52F1B9F2327C3AB001CF1E6 /* ItemCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		B52F1B992327BAC4001CF1E6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B52F1B9B2327BB25001CF1E6 /* Item.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B52F1B9A2327BADC001CF1E6 /* Utilites */ = {
+			isa = PBXGroup;
+			children = (
+				B52F1B9D2327BD1A001CF1E6 /* FoodItems.swift */,
+			);
+			path = Utilites;
+			sourceTree = "<group>";
+		};
+		B550A2302327F93D00FE19B1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B550A2312327F96200FE19B1 /* IAPService.swift */,
+				B550A23323280C2200FE19B1 /* Constants.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		B550A235232A4E1900FE19B1 /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				B550A236232A4E2C00FE19B1 /* Product.swift */,
+				B550A238232A4E6900FE19B1 /* Purchase.swift */,
+			);
+			path = Enum;
+			sourceTree = "<group>";
+		};
 		B5B73E2A2324445C000CDCB1 = {
 			isa = PBXGroup;
 			children = (
@@ -54,8 +121,13 @@
 		B5B73E352324445C000CDCB1 /* FoodZilla */ = {
 			isa = PBXGroup;
 			children = (
+				B550A235232A4E1900FE19B1 /* Enum */,
+				B550A2302327F93D00FE19B1 /* Services */,
+				B52F1B9A2327BADC001CF1E6 /* Utilites */,
+				B52F1B992327BAC4001CF1E6 /* Model */,
+				B52F1B982327BAB8001CF1E6 /* View */,
+				B52F1B972327BA95001CF1E6 /* Controller */,
 				B5B73E362324445C000CDCB1 /* AppDelegate.swift */,
-				B5B73E382324445C000CDCB1 /* ViewController.swift */,
 				B5B73E3A2324445C000CDCB1 /* Main.storyboard */,
 				B5B73E3D2324445E000CDCB1 /* Assets.xcassets */,
 				B5B73E3F2324445E000CDCB1 /* LaunchScreen.storyboard */,
@@ -135,8 +207,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5B73E392324445C000CDCB1 /* ViewController.swift in Sources */,
+				B52F1B9C2327BB25001CF1E6 /* Item.swift in Sources */,
+				B5B73E392324445C000CDCB1 /* StoreFrontVC.swift in Sources */,
+				B550A237232A4E2C00FE19B1 /* Product.swift in Sources */,
+				B52F1BA02327C3AB001CF1E6 /* ItemCell.swift in Sources */,
+				B52F1B962327AAD7001CF1E6 /* Detail VC.swift in Sources */,
+				B550A2322327F96200FE19B1 /* IAPService.swift in Sources */,
+				B550A239232A4E6900FE19B1 /* Purchase.swift in Sources */,
 				B5B73E372324445C000CDCB1 /* AppDelegate.swift in Sources */,
+				B52F1B9E2327BD1A001CF1E6 /* FoodItems.swift in Sources */,
+				B550A23423280C2200FE19B1 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,13 +363,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9X329BRT6C;
+				DEVELOPMENT_TEAM = 83G4KB5W5L;
 				INFOPLIST_FILE = FoodZilla/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "funny-farm.FoodZilla";
+				PRODUCT_BUNDLE_IDENTIFIER = com.den.rakitin.FoodZilla;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -301,13 +381,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9X329BRT6C;
+				DEVELOPMENT_TEAM = 83G4KB5W5L;
 				INFOPLIST_FILE = FoodZilla/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "funny-farm.FoodZilla";
+				PRODUCT_BUNDLE_IDENTIFIER = com.den.rakitin.FoodZilla;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
