@@ -13,22 +13,24 @@ protocol IAPServiceDelegate {
     func IAPProductsLoaded()
 }
 
-class IAPService: NSObject, SKProductsRequestDelegate {
+class IAPService: SKReceiptRefreshRequest, SKProductsRequestDelegate {
     
     static let instance = IAPService()
     
-    var delegate: IAPServiceDelegate?
+    var iapDelegate: IAPServiceDelegate?
     
     var products  = [SKProduct]()
     var productIds = Set<String>()
     var productRequest = SKProductsRequest()
     
+    
+    var expirationDate = UserDefaults.standard.value(forKey: "expirationDate") as? Date
     var nonConsumablePurchaseWasMade = UserDefaults.standard.bool(forKey: "nonConsumablePurchaseWasMade")
     
-    override init() {
-        super.init()
-        SKPaymentQueue.default().add(self)
-    }
+//    override init() {
+//        super.init()
+//        SKPaymentQueue.default().add(self)
+//    }
     
     func loadProduct () {
         productIdsToSet()
@@ -61,13 +63,109 @@ class IAPService: NSObject, SKProductsRequestDelegate {
             requestProduct(forIds: productIds)
             print("Something goes wrong")
         } else {
-            delegate?.IAPProductsLoaded()
+            iapDelegate?.IAPProductsLoaded()
 //            print(products[0].localizedTitle)
         }
     }
     
     func restorePurchase(){
         SKPaymentQueue.default().restoreCompletedTransactions()
+    }
+    
+    func requestDidFinish(_ request: SKRequest) {
+        uploadReceipt { (valid) in
+            if valid {
+                debugPrint("SUB VALID!")
+//                check if sub still valid
+                self.isSubActive { (active) in
+                    if active {
+                        debugPrint("SUB ACTIVE!")
+                        self.sendNotifFor(status: .subscribe, withIdentifire: nil, orBoolean: true)
+                        self.setNonConsumablePurchase(true)
+                    } else {
+                        debugPrint("SUB EXPIRED!")
+                        self.sendNotifFor(status: .subscribe, withIdentifire: nil, orBoolean: false)
+                        self.setNonConsumablePurchase(false)
+                    }
+                }
+            } else {
+                debugPrint("SUB INVALID!")
+                    self.sendNotifFor(status: .subscribe, withIdentifire: nil, orBoolean: false)
+                    self.setNonConsumablePurchase(false)
+            }
+        }
+    }
+    
+    func isSubActive(completionHandler: @escaping (Bool) -> Void) {
+        reloadExpiryDate()
+        let nowDate = Date()
+        debugPrint("Time remaining:", (expirationDate?.timeIntervalSinceNow)! / 60)
+        guard let expirationDate = expirationDate else { return }
+        if nowDate.isLessThan(expirationDate) {
+            completionHandler(true)
+        } else {
+            completionHandler(false)
+        }
+    }
+    
+    func uploadReceipt(completionHandler: @escaping (Bool) -> Void){
+        guard let receiptUrl = Bundle.main.appStoreReceiptURL, let receipt = try? Data(contentsOf: receiptUrl).base64EncodedString() else {
+            debugPrint("No receipt URL")
+            completionHandler(false)
+            return
+        }
+        
+//        print(receipt)
+        
+        let body = [
+            "receipt-data": receipt,
+            "password": appSecret
+        ]
+        
+        let bodyData = try! JSONSerialization.data(withJSONObject: body, options: [])
+        
+        let url = URL(string: "https://sandbox.itunes.apple.com/verifyReceipt")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = bodyData
+        
+        let task = URLSession.shared.dataTask(with: request) { (responseData, responce, error) in
+            if let error = error {
+                debugPrint("ERROR: ", error)
+                completionHandler(false)
+            } else  if let responseData = responseData{
+//                debugPrint(responseData.description)
+                let json = try! JSONSerialization.jsonObject(with: responseData, options: .allowFragments) as! Dictionary<String, Any>
+                let newExpirationDate = self.expirationDateFromResponce(jsonResponse: json )
+                self.setExpiretion(forDate: newExpirationDate!)
+//                debugPrint("New expiration date ", newExpirationDate!)
+//                print(json)
+                completionHandler(true)
+            }
+        }
+        task.resume()
+    }
+    
+    func expirationDateFromResponce (jsonResponse: Dictionary<String, Any>) -> Date? {
+        if let reciepInfo: NSArray = jsonResponse["latest_receipt_info"] as? NSArray {
+            let lastReciept = reciepInfo.lastObject as! Dictionary<String, Any>
+            print("This is a \(lastReciept)")
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss VV"
+            let expirationDate: Date  = (formatter.date(from: lastReciept["expires_date"] as! String)!)
+            print(expirationDate)
+            return expirationDate
+        } else {
+            return nil
+        }
+    }
+    
+    func setExpiretion(forDate date: Date) {
+        UserDefaults.standard.set(date, forKey: "expirationDate")
+    }
+    
+    func reloadExpiryDate() {
+        expirationDate = UserDefaults.standard.value(forKey: "expirationDate") as? Date
     }
     
     func attemptPurchaseForItemWith(productIndex: Product){
@@ -85,23 +183,28 @@ extension IAPService: SKPaymentTransactionObserver {
         for transaction in transactions {
             switch transaction.transactionState{
             case .purchased:
-                SKPaymentQueue.default().finishTransaction(transaction)
                 complete(transaction: transaction)
-                sendNotifFor(status: .purchased, withIdentifire: transaction.payment.productIdentifier)
+                 SKPaymentQueue.default().finishTransaction(transaction)
+//                uploadReceipt { (valid) in
+//
+//                }
                 debugPrint("Purchase was successful")
                 
-                break
+//                break
             case .restored:
                 SKPaymentQueue.default().finishTransaction(transaction)
                 break
             case .failed:
+                
+                sendNotifFor(status: .failed, withIdentifire: nil, orBoolean: nil)
                 SKPaymentQueue.default().finishTransaction(transaction)
-                sendNotifFor(status: .failed, withIdentifire: nil)
-                debugPrint("Purchase was failed")
+                debugPrint("Purchase was failed", transaction.error)
                 break
             case .deferred:
+                SKPaymentQueue.default().finishTransaction(transaction)
                 break
             case .purchasing:
+                debugPrint("Purchasing...")
                 break
                 
             @unknown default:
@@ -111,14 +214,19 @@ extension IAPService: SKPaymentTransactionObserver {
     }
     
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
-        sendNotifFor(status: .restore, withIdentifire: nil)
+        sendNotifFor(status: .restore, withIdentifire: nil, orBoolean: nil)
         setNonConsumablePurchase(true)
     }
     
     
     func complete(transaction: SKPaymentTransaction) {
         switch transaction.payment.productIdentifier {
+        case IAP_MEALTIME_MONTLY_SUB:
+            sendNotifFor(status: .subscribe, withIdentifire: nil, orBoolean: true)
+            setNonConsumablePurchase(true)
+            break
         case IAP_MEAL_ID:
+            sendNotifFor(status: .purchased, withIdentifire: transaction.payment.productIdentifier, orBoolean: nil)
             break
         case IAP_HIDE_ADDS:
             setNonConsumablePurchase(true)
@@ -132,7 +240,7 @@ extension IAPService: SKPaymentTransactionObserver {
         UserDefaults.standard.set(status, forKey: "nonConsumablePurchaseWasMade")
     }
     
-    func sendNotifFor(status: PurchaseStatus, withIdentifire identifire: String?){
+    func sendNotifFor(status: PurchaseStatus, withIdentifire identifire: String?, orBoolean bool: Bool?){
         switch status {
         case .purchased:
             NotificationCenter.default.post(name: NSNotification.Name(IapServicePurchaseNotification), object: identifire)
@@ -140,8 +248,11 @@ extension IAPService: SKPaymentTransactionObserver {
         case .restore:
             NotificationCenter.default.post(name: NSNotification.Name(IapServiceRestoreNotification), object: nil)
             break
+        case .subscribe:
+            NotificationCenter.default.post(name: NSNotification.Name(IAPSubInfoChangeNotification), object: bool)
+            break
         default:
-            NotificationCenter.default.post(name: NSNotification.Name(IapServiceFailureNotification), object: nil)
+//            NotificationCenter.default.post(name: NSNotification.Name(IAPSubInfoChangeNotification), object: bool)
             break
         }
     }

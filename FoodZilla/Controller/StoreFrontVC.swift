@@ -12,7 +12,9 @@ class StoreFrontVC: UIViewController, UICollectionViewDelegate, UICollectionView
 
     
 
+    @IBOutlet weak var foodzillaLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var subStatusLbl: UILabel!
     
     
     override func viewDidLoad() {
@@ -20,10 +22,25 @@ class StoreFrontVC: UIViewController, UICollectionViewDelegate, UICollectionView
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        IAPService.instance.delegate = self
+        IAPService.instance.iapDelegate = self
         IAPService.instance.loadProduct()
         
         NotificationCenter.default.addObserver(self, selector: #selector(showAlert), name: NSNotification.Name(IapServiceRestoreNotification), object: nil)
+        
+            NotificationCenter.default.addObserver(self, selector: #selector(self.subscriptionStatusWasChange(_:)), name: Notification.Name(IAPSubInfoChangeNotification), object: nil)
+        
+
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        IAPService.instance.isSubActive { (active) in
+            
+        }
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     @objc func showAlert(){
@@ -31,11 +48,35 @@ class StoreFrontVC: UIViewController, UICollectionViewDelegate, UICollectionView
         let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
-        
     }
+    
+    @objc func subscriptionStatusWasChange(_ notification: Notification){
+        guard let status = notification.object as? Bool else {
+            return
+        }
+        DispatchQueue.main.async
+                   {
+        if status == true {
+            self.foodzillaLbl.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            self.view.backgroundColor =  #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+            self.collectionView.backgroundColor = #colorLiteral(red: 0.2605174184, green: 0.2605243921, blue: 0.260520637, alpha: 1)
+            self.subStatusLbl.text = "SUB ACTIVE"
+            self.subStatusLbl.textColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+            
+        } else {
+         
+            self.foodzillaLbl.textColor = #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1)
+            self.view.backgroundColor =  #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            self.collectionView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            self.subStatusLbl.text = "SUB EXPIRED"
+            self.subStatusLbl.textColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
+                    }
+        }
+    }
+    
 
     @IBAction func subscribeBtnWasPressed(_ sender: Any) {
-        
+        IAPService.instance.attemptPurchaseForItemWith(productIndex: .montlySub)
     }
     
     

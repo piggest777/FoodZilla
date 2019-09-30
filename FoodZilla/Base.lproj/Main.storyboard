@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nQx-wP-cid">
-                                <rect key="frame" x="16" y="58" width="288" height="490"/>
+                                <rect key="frame" x="16" y="58" width="288" height="455"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OlU-Gw-9xg">
                                     <size key="itemSize" width="135" height="202"/>
@@ -113,24 +113,38 @@
                                     <action selector="subscribeBtnWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Lwu-6i-ATV"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UPDATING..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIn-Sg-3Zo">
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="et5-SU-vYP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="24"/>
+                                <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="UIn-Sg-3Zo" firstAttribute="top" secondItem="nQx-wP-cid" secondAttribute="bottom" constant="5" id="0xV-gW-MVl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="wY2-b6-JSf" secondAttribute="trailing" constant="16" id="1Di-MO-PGt"/>
                             <constraint firstItem="wY2-b6-JSf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1rS-1F-VEg"/>
                             <constraint firstItem="hao-Qo-C6o" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="77C-RV-yx0"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UIn-Sg-3Zo" secondAttribute="trailing" id="A3K-R7-DqR"/>
                             <constraint firstItem="nQx-wP-cid" firstAttribute="top" secondItem="hao-Qo-C6o" secondAttribute="bottom" constant="8" id="APT-NK-36X"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nQx-wP-cid" secondAttribute="trailing" constant="16" id="Axd-8L-A8M"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="UIn-Sg-3Zo" secondAttribute="bottom" id="B81-hU-hRa"/>
                             <constraint firstItem="8mj-mn-zPv" firstAttribute="centerY" secondItem="hao-Qo-C6o" secondAttribute="centerY" id="DY0-yX-Hsd"/>
                             <constraint firstItem="hao-Qo-C6o" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="QvG-ng-E2y"/>
+                            <constraint firstItem="UIn-Sg-3Zo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WxR-Fe-XUs"/>
                             <constraint firstItem="nQx-wP-cid" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Yyj-1w-v0d"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nQx-wP-cid" secondAttribute="bottom" constant="20" id="ex6-Er-3IZ"/>
                             <constraint firstItem="wY2-b6-JSf" firstAttribute="leading" secondItem="8mj-mn-zPv" secondAttribute="trailing" constant="2" id="q9h-yA-ll0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="nQx-wP-cid" id="rZK-QM-guJ"/>
+                        <outlet property="foodzillaLbl" destination="hao-Qo-C6o" id="hQ7-wG-2ma"/>
+                        <outlet property="subStatusLbl" destination="UIn-Sg-3Zo" id="zmY-B1-VvJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

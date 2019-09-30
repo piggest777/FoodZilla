@@ -12,4 +12,5 @@ enum PurchaseStatus {
     case purchased
     case restore
     case failed
+    case subscribe
 }

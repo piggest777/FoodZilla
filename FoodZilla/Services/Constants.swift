@@ -18,3 +18,6 @@ let IAP_MEALTIME_MONTLY_SUB = "com.den.mealsmonthly"
 let IapServicePurchaseNotification = "IapServicePurchaseNotification"
 let IapServiceRestoreNotification = "IapServiceRestoreNotification"
 let IapServiceFailureNotification = "IapServiceFailureNotification"
+let IAPSubInfoChangeNotification = "IAPSubInfoChangeNotification"
+
+let appSecret = "2814d6f28f0b425f8ef253a3eaadb7ff"

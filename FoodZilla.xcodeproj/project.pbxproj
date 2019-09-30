@@ -15,6 +15,7 @@
 		B550A23423280C2200FE19B1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550A23323280C2200FE19B1 /* Constants.swift */; };
 		B550A237232A4E2C00FE19B1 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550A236232A4E2C00FE19B1 /* Product.swift */; };
 		B550A239232A4E6900FE19B1 /* Purchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B550A238232A4E6900FE19B1 /* Purchase.swift */; };
+		B575B4E3233E48D30038DA14 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = B575B4E2233E48D30038DA14 /* DateExt.swift */; };
 		B5B73E372324445C000CDCB1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B73E362324445C000CDCB1 /* AppDelegate.swift */; };
 		B5B73E392324445C000CDCB1 /* StoreFrontVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B73E382324445C000CDCB1 /* StoreFrontVC.swift */; };
 		B5B73E3C2324445C000CDCB1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5B73E3A2324445C000CDCB1 /* Main.storyboard */; };
@@ -31,6 +32,7 @@
 		B550A23323280C2200FE19B1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		B550A236232A4E2C00FE19B1 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		B550A238232A4E6900FE19B1 /* Purchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Purchase.swift; sourceTree = "<group>"; };
+		B575B4E2233E48D30038DA14 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		B5B73E332324445C000CDCB1 /* FoodZilla.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodZilla.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5B73E362324445C000CDCB1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5B73E382324445C000CDCB1 /* StoreFrontVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreFrontVC.swift; sourceTree = "<group>"; };
@@ -102,6 +104,14 @@
 			path = Enum;
 			sourceTree = "<group>";
 		};
+		B575B4E1233E48B60038DA14 /* Ext */ = {
+			isa = PBXGroup;
+			children = (
+				B575B4E2233E48D30038DA14 /* DateExt.swift */,
+			);
+			path = Ext;
+			sourceTree = "<group>";
+		};
 		B5B73E2A2324445C000CDCB1 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +131,7 @@
 		B5B73E352324445C000CDCB1 /* FoodZilla */ = {
 			isa = PBXGroup;
 			children = (
+				B575B4E1233E48B60038DA14 /* Ext */,
 				B550A235232A4E1900FE19B1 /* Enum */,
 				B550A2302327F93D00FE19B1 /* Services */,
 				B52F1B9A2327BADC001CF1E6 /* Utilites */,
@@ -210,6 +221,7 @@
 				B52F1B9C2327BB25001CF1E6 /* Item.swift in Sources */,
 				B5B73E392324445C000CDCB1 /* StoreFrontVC.swift in Sources */,
 				B550A237232A4E2C00FE19B1 /* Product.swift in Sources */,
+				B575B4E3233E48D30038DA14 /* DateExt.swift in Sources */,
 				B52F1BA02327C3AB001CF1E6 /* ItemCell.swift in Sources */,
 				B52F1B962327AAD7001CF1E6 /* Detail VC.swift in Sources */,
 				B550A2322327F96200FE19B1 /* IAPService.swift in Sources */,
